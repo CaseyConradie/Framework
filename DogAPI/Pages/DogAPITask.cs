@@ -1,13 +1,11 @@
 using System.Collections.Generic;
-using System.Reflection;
 using AventStack.ExtentReports;
 using AventStack.ExtentReports.MarkupUtils;
 using Framework.Src.Tools;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
-using OpenQA.Selenium;
 
-namespace Framework.Src.Pages
+namespace Framework.WayToAutomation.Pages
 {
     public class DogAPITask
     {
