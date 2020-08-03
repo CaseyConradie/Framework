@@ -8,7 +8,6 @@ using OpenQA.Selenium.Edge;
 using System;
 using OpenQA.Selenium.Support.UI;
 using System.Collections.Generic;
-using System.Text;
 using AventStack.ExtentReports;
 
 namespace Framework.Src.Tools
@@ -16,9 +15,16 @@ namespace Framework.Src.Tools
     public class SeleniumUtils
     {
         private IWebDriver _driver;
-        public SeleniumUtils(string BrowserType, string url, string version = null)
+        private ExtentTest curTest;
+        // public SeleniumUtils(string BrowserType, string url, string version = null)
+        // {
+        //     _driver = GenerateDriver(BrowserType, url, version);
+        // }
+
+        public SeleniumUtils(IWebDriver driver, ExtentTest _curTest)
         {
-            _driver = GenerateDriver( BrowserType,  url,  version );
+            _driver = driver;
+            curTest = _curTest;
         }
 
         public IWebDriver GetDriver => _driver;
@@ -28,7 +34,7 @@ namespace Framework.Src.Tools
         /// Generates the driver by selecting browser and version
         /// Navigates to the URl and maximises the browser
         /// </summary>
-        public IWebDriver GenerateDriver(string BrowserType, string url, string version = null)
+        public static IWebDriver GenerateDriver(string BrowserType, string url, string version = null)
         {
             IWebDriver _drv = (IWebDriver)null;
             switch (BrowserType.ToLower())
@@ -97,7 +103,7 @@ namespace Framework.Src.Tools
                 return randomNumber.ToString();
             }
             catch (Exception ex)
-            {   
+            {
                 Base.Report.TestFailed("Failed to generate rand" + ex.Message, _driver, curTest);
                 throw;
             }
