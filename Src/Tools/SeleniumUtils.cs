@@ -12,19 +12,11 @@ using AventStack.ExtentReports;
 
 namespace Framework.Src.Tools
 {
-    public class SeleniumUtils
+    public abstract class SeleniumUtils : ReportHandler
     {
-        private IWebDriver _driver;
-        private ExtentTest curTest;
-        // public SeleniumUtils(string BrowserType, string url, string version = null)
-        // {
-        //     _driver = GenerateDriver(BrowserType, url, version);
-        // }
-
         public SeleniumUtils(IWebDriver driver, ExtentTest _curTest)
         {
             _driver = driver;
-            curTest = _curTest;
         }
 
         public IWebDriver GetDriver => _driver;
@@ -79,7 +71,7 @@ namespace Framework.Src.Tools
         /// <summary>
         /// Shuts down the driver
         /// </summary>
-        public bool ShutDown()
+        public static bool ShutDown(IWebDriver _driver)
         {
             try
             {
@@ -94,7 +86,7 @@ namespace Framework.Src.Tools
             }
         }
 
-        public string GenerateRandomNumber(int EndNumber, ExtentTest curTest)
+        public string GenerateRandomNumber(int EndNumber)
         {
             try
             {
@@ -104,12 +96,12 @@ namespace Framework.Src.Tools
             }
             catch (Exception ex)
             {
-                Base.Report.TestFailed("Failed to generate rand" + ex.Message, _driver, curTest);
+                Base.Report.TestFailed("Failed to generate rand" + ex.Message, _driver, _curTest);
                 throw;
             }
         }
 
-        public bool WaitForElement(By selector, ExtentTest curTest, int timeSpan = 10)
+        public bool WaitForElement(By selector, int timeSpan = 10)
         {
             try
             {
@@ -121,16 +113,16 @@ namespace Framework.Src.Tools
             }
             catch (Exception ex)
             {
-                Base.Report.TestFailed("Failed to wait for element" + ex.Message, _driver, curTest);
+                Base.Report.TestFailed("Failed to wait for element" + ex.Message, _driver, _curTest);
                 throw;
             }
         }
 
-        public bool EnterText(By selector, string text, ExtentTest curTest)
+        public bool EnterText(By selector, string text)
         {
             try
             {
-                WaitForElement(selector, curTest);
+                WaitForElement(selector);
                 IWebElement element = _driver.FindElement(selector);
                 element.Clear();
                 element.SendKeys(text);
@@ -138,59 +130,59 @@ namespace Framework.Src.Tools
             }
             catch (Exception ex)
             {
-                Base.Report.TestFailed("Failed to enter text" + ex.Message, _driver, curTest);
+                Base.Report.TestFailed("Failed to enter text" + ex.Message, _driver, _curTest);
                 throw;
             }
         }
 
-        public string GetText(By selector, ExtentTest curTest)
+        public string GetText(By selector)
         {
             try
             {
-                WaitForElement(selector, curTest);
+                WaitForElement(selector);
                 IWebElement element = _driver.FindElement(selector);
                 return element.Text;
             }
             catch (Exception ex)
             {
-                Base.Report.TestFailed("Failed to get text" + ex.Message, _driver, curTest);
+                Base.Report.TestFailed("Failed to get text" + ex.Message, _driver, _curTest);
                 throw;
             }
         }
 
-        public string GetAttribute(By selector, string attribute, ExtentTest curTest)
+        public string GetAttribute(By selector, string attribute)
         {
             try
             {
-                WaitForElement(selector, curTest);
+                WaitForElement(selector);
                 IWebElement element = _driver.FindElement(selector);
                 return element.GetAttribute(attribute);
             }
             catch (Exception ex)
             {
-                Base.Report.TestFailed("Failed to retrieve attribute" + ex.Message, _driver, curTest);
+                Base.Report.TestFailed("Failed to retrieve attribute" + ex.Message, _driver, _curTest);
                 throw;
             }
         }
 
-        public bool ClickElement(By selector, ExtentTest curTest)
+        public bool ClickElement(By selector)
         {
             try
             {
-                WaitForElement(selector, curTest);
+                WaitForElement(selector);
                 IWebElement element = _driver.FindElement(selector);
                 element.Click();
                 return true;
             }
             catch (Exception ex)
             {
-                Base.Report.TestFailed("Failed to click element" + ex.Message, _driver, curTest);
+                Base.Report.TestFailed("Failed to click element" + ex.Message, _driver, _curTest);
                 throw;
             }
         }
 
 
-        public List<string> GetAllValuesFrom(string xpath, ExtentTest curTest)
+        public List<string> GetAllValuesFrom(string xpath)
         {
             try
             {
@@ -212,16 +204,16 @@ namespace Framework.Src.Tools
             }
             catch (Exception ex)
             {
-                Base.Report.TestFailed("Failed to get list of texts" + ex.Message, _driver, curTest);
+                Base.Report.TestFailed("Failed to get list of texts" + ex.Message, _driver, _curTest);
                 throw;
             }
         }
 
-        public bool SelectTextFromDropdown(By selector, string textToSelect, ExtentTest curTest)
+        public bool SelectTextFromDropdown(By selector, string textToSelect)
         {
             try
             {
-                WaitForElement(selector, curTest);
+                WaitForElement(selector);
                 IWebElement element = _driver.FindElement(selector);
                 SelectElement select = new SelectElement(element);
                 select.SelectByText(textToSelect);
@@ -229,7 +221,7 @@ namespace Framework.Src.Tools
             }
             catch (Exception ex)
             {
-                Base.Report.TestFailed("Failed to select from dropdown" + ex.Message, _driver, curTest);
+                Base.Report.TestFailed("Failed to select from dropdown" + ex.Message, _driver, _curTest);
                 throw;
             }
         }

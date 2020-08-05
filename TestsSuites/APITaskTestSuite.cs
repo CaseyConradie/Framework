@@ -10,30 +10,31 @@ namespace Framework.TestsSuites
     [TestClass]
     public class APITaskTestSuite
     {
-        DogAPIApp _dogAPI;
+        public TestContext TestContext { get; set; }
+        private DogAPIApp _dogAPI;
 
         [TestMethod, TestCategory("APITests"), TestProperty("Description", "API request to produce a list of all dog breeds.")]
         public void GetListOfDogBreeds()
         {
-            var curTest = Base.Report.CreateTest(MethodBase.GetCurrentMethod().ToString().Replace("Void", "").Replace("()", "").Trim());
+            var curTest = Base.Report.CreateTest(TestContext.TestName);
             _dogAPI = new DogAPIApp();
-            _dogAPI.DogAPIAPITask1(curTest);
+            _dogAPI._DogAPITask.APITask1(curTest);
         }
 
         [TestMethod, TestCategory("APITests"), TestProperty("Description", "API request to produce a list of sub-breeds for “retriever”.")]
         public void GetListOfSubBreeds()
         {
-            var curTest = Base.Report.CreateTest(MethodBase.GetCurrentMethod().ToString().Replace("Void", "").Replace("()", "").Trim());
+            var curTest = Base.Report.CreateTest(TestContext.TestName);
             _dogAPI = new DogAPIApp();
-            _dogAPI.DogAPIAPITask2(curTest);
+            _dogAPI._DogAPITask.APITask2(curTest);
         }
 
         [TestMethod, TestCategory("APITests"), TestProperty("Description", "API request to produce a random dog Image.")]
         public void GetRandomImage()
         {
-            var curTest = Base.Report.CreateTest(MethodBase.GetCurrentMethod().ToString().Replace("Void", "").Replace("()", "").Trim());
+            var curTest = Base.Report.CreateTest(TestContext.TestName);
             _dogAPI = new DogAPIApp();
-            _dogAPI.DogAPIAPITask3(curTest);
+            _dogAPI._DogAPITask.APITask3(curTest);
         }
 
     }
