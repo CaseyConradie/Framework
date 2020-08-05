@@ -96,7 +96,7 @@ namespace Framework.Src.Tools
             }
             catch (Exception ex)
             {
-                Base.Report.TestFailed("Failed to generate rand" + ex.Message, _driver, _curTest);
+               TestFailed("Failed to generate rand" + ex.Message);
                 throw;
             }
         }
@@ -113,7 +113,7 @@ namespace Framework.Src.Tools
             }
             catch (Exception ex)
             {
-                Base.Report.TestFailed("Failed to wait for element" + ex.Message, _driver, _curTest);
+                TestFailed("Failed to wait for element" + ex.Message);
                 throw;
             }
         }
@@ -130,7 +130,7 @@ namespace Framework.Src.Tools
             }
             catch (Exception ex)
             {
-                Base.Report.TestFailed("Failed to enter text" + ex.Message, _driver, _curTest);
+                TestFailed("Failed to enter text" + ex.Message);
                 throw;
             }
         }
@@ -145,7 +145,7 @@ namespace Framework.Src.Tools
             }
             catch (Exception ex)
             {
-                Base.Report.TestFailed("Failed to get text" + ex.Message, _driver, _curTest);
+                TestFailed("Failed to get text" + ex.Message);
                 throw;
             }
         }
@@ -160,7 +160,7 @@ namespace Framework.Src.Tools
             }
             catch (Exception ex)
             {
-                Base.Report.TestFailed("Failed to retrieve attribute" + ex.Message, _driver, _curTest);
+                TestFailed("Failed to retrieve attribute" + ex.Message);
                 throw;
             }
         }
@@ -176,7 +176,7 @@ namespace Framework.Src.Tools
             }
             catch (Exception ex)
             {
-                Base.Report.TestFailed("Failed to click element" + ex.Message, _driver, _curTest);
+               TestFailed("Failed to click element" + ex.Message);
                 throw;
             }
         }
@@ -204,7 +204,7 @@ namespace Framework.Src.Tools
             }
             catch (Exception ex)
             {
-                Base.Report.TestFailed("Failed to get list of texts" + ex.Message, _driver, _curTest);
+                TestFailed("Failed to get list of texts" + ex.Message);
                 throw;
             }
         }
@@ -221,7 +221,7 @@ namespace Framework.Src.Tools
             }
             catch (Exception ex)
             {
-                Base.Report.TestFailed("Failed to select from dropdown" + ex.Message, _driver, _curTest);
+                TestFailed("Failed to select from dropdown" + ex.Message);
                 throw;
             }
         }
